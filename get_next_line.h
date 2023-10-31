@@ -7,6 +7,7 @@
 #endif
 
 #include <stdlib.h>
+#include <fcntl.h>
 
 char	*get_next_line(int fd);
 char	*ft_left_read(int fd, char *str);

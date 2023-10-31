@@ -60,13 +60,15 @@ char	*ft_left_read(int fd, char *str)
 	char	*buff;
 	int	readed_bytes;
 
+	(void)fd;
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	readed_bytes = 1;
 	while (!ft_strchr(str, '\n') && readed_bytes != 0)
 	{
-		readed_bytes = read(fd, buff, BUFFER_SIZE);
+//		readed_bytes = read(fd, buff, BUFFER_SIZE);
+		readed_bytes = -1;
 		if (readed_bytes == -1)
 		{
 			free(buff);
@@ -94,7 +96,8 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*
+#include <stdio.h>
+
 int	main(void)
 {
 	char	*line;
@@ -124,4 +127,3 @@ int	main(void)
 	close(fd3);
 	return (0);
 }
-*/
