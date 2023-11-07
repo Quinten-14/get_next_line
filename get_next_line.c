@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qraymaek <qraymaek@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 21:38:07 by qraymaek          #+#    #+#             */
+/*   Updated: 2023/11/07 21:48:35 by qraymaek         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#include <unistd.h>
 
 char	*ft_new_left_str(char *left_str)
 {
@@ -58,7 +69,7 @@ char	*fetch_line(char *left_str)
 char	*ft_left_read(int fd, char *str)
 {
 	char	*buff;
-	int	readed_bytes;
+	int		readed_bytes;
 
 	(void)fd;
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -67,11 +78,11 @@ char	*ft_left_read(int fd, char *str)
 	readed_bytes = 1;
 	while (!ft_strchr(str, '\n') && readed_bytes != 0)
 	{
-//		readed_bytes = read(fd, buff, BUFFER_SIZE);
-		readed_bytes = -1;
+		readed_bytes = read(fd, buff, BUFFER_SIZE);
 		if (readed_bytes == -1)
 		{
 			free(buff);
+			free(str);
 			return (NULL);
 		}
 		buff[readed_bytes] = '\0';
@@ -83,7 +94,7 @@ char	*ft_left_read(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	char	*line;
+	char		*line;
 	static char	*left_str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -94,36 +105,4 @@ char	*get_next_line(int fd)
 	line = fetch_line(left_str);
 	left_str = ft_new_left_str(left_str);
 	return (line);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char	*line;
-	int		i;
-	int		fd1;
-	int		fd2;
-	int		fd3;
-	fd1 = open("tests/test.txt", O_RDONLY);
-	fd2 = open("tests/test2.txt", O_RDONLY);
-	fd3 = open("tests/test3.txt", O_RDONLY);
-	i = 1;
-	while (i < 7)
-	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		i++;
-	}
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
 }

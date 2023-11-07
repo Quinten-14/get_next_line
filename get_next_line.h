@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qraymaek <qraymaek@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 21:38:31 by qraymaek          #+#    #+#             */
+/*   Updated: 2023/11/07 21:38:33 by qraymaek         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
-
-#include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 char	*ft_left_read(int fd, char *str);

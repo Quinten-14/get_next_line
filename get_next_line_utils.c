@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qraymaek <qraymaek@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 21:37:59 by qraymaek          #+#    #+#             */
+/*   Updated: 2023/11/07 21:38:01 by qraymaek         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(char *str)
@@ -12,7 +24,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strchr(char	*str, int c)
+char	*ft_strchr(char *str, int c)
 {
 	size_t	i;
 
@@ -23,7 +35,7 @@ char	*ft_strchr(char	*str, int c)
 		return ((char *)&str[ft_strlen(str)]);
 	while (str[i])
 	{
-		if (str[i] == (char) c)
+		if (str[i] == (char)c)
 			return ((char *)&str[i]);
 		i++;
 	}
